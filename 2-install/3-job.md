@@ -8,14 +8,15 @@ The code sets up a UDP connection and uses an online trajectory buffer to contro
 
 ## Code Breakdown
 
-```
+```text
 Hyundai Robot Job File; { version: 1.6, mech_type: "", total_axis: -1, aux_axis: 0 }
 ```
+
 This line specifies the job file format and version.
 
 ### Network Setup
 
-```
+```text
 import enet
 global enet0
 enet0=enet.ENet()
@@ -24,6 +25,7 @@ enet0.lport=7000
 enet0.rport=7000
 enet0.open
 ```
+
 - Imports the `enet` module for network communication
 - Creates a global `ENet` object named `enet0`
 - Sets the IP address to communicate with (presumably the PC's IP)
@@ -32,7 +34,7 @@ enet0.open
 
 ### Online Trajectory Setup
 
-```
+```text
 global onl
 onl=online.Traject()
 onl.time_from_start=-1.0 # disable
@@ -40,6 +42,7 @@ onl.look_ahead_time=0.1 #The time it takes to execute after a value is entered i
 onl.interval=0.1 #Online.Traject Movement time from pose accumulated in buffer to next pose
 onl.init # online trajectory operation init (buffer init)
 ```
+
 - Creates a global `online.Traject` object named `onl`
 - Configures the online trajectory parameters:
   - Disables `time_from_start`
@@ -49,7 +52,7 @@ onl.init # online trajectory operation init (buffer init)
 
 ### Main Loop
 
-```
+```text
 var msg
 #var po
 10 enet0.recv
@@ -60,6 +63,7 @@ print msg
 onl.buf_in msg #Put the pose in the 'po' variable into the online.Traject buffer.
 goto 10
 ```
+
 - Declares variables `msg` (and `po`, which is commented out)
 - Enters a loop (label 10):
   1. Receives a message via UDP
@@ -76,8 +80,9 @@ goto 10
 - The commented-out lines suggest that the received message might be convertible to a `Pose` object, but this functionality is not currently in use.
 - The continuous loop allows for real-time control and feedback of the robot's position.
 
-# code
-```
+## code
+
+```text
 Hyundai Robot Job File; { version: 1.6, mech_type: "", total_axis: -1, aux_axis: 0 }
      import enet
      global enet0

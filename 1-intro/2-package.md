@@ -14,6 +14,7 @@
 ## api_agent
 
 ### Launch Files
+
 - **api_agent.launch.py**: Launches the API agent for communication with the robot controller.
 
 | Parameter | Description |
@@ -30,12 +31,14 @@
 ## hr_description
 
 ### Folders
+
 - **config**: Contains physical parameter information for each robot model
 - **meshes**: Contains STL files representing the external appearance of each robot model
 - **rviz**: Contains RViz configuration files
 - **urdf**: Contains URDF files for robot descriptions
 
 ### Launch Files
+
 - **view_hr.launch.py**: Launches the HR robot model visualization in RViz.
 
 | Parameter | Description |
@@ -51,11 +54,13 @@
 ## hr_moveit_config
 
 ### Folders
+
 - **config**: Contains MoveIt configuration files
 - **rviz**: Contains RViz configuration files
 - **srdf**: Contains Semantic Robot Description Format files
 
 ### Launch Files
+
 - **hr_moveit.launch.py**: Launches the MoveIt configuration for the HR robot.
 
 | Parameter | Description |
@@ -77,9 +82,11 @@
 ## hr_simulation
 
 ### Folders
+
 - **config**: Contains HR controller-related configuration files
 
 ### Launch Files
+
 - **hr_sim_control.launch.py**: Launches the HR robot simulation with basic control.
 
 | Parameter | Description |

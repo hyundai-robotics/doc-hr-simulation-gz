@@ -4,7 +4,7 @@
 
 The following robots can be simulated using the `hr_sim_moveit.launch.py` file in the `hr_simulation` package:
 
-```
+```text
 "ha006b", "hh7", "hh020", "hs220_02", "hx400", "yl012"
 ```
 
@@ -49,21 +49,24 @@ After launching the HD Hyundai Robotics robot simulation, follow these steps to 
 Execute the following steps:
 
 1. Turn the motor ON:
+
    ```bash
    ros2 service call /api_agent/robot/post/motor_control std_srvs/srv/SetBool "{data: true}"
    ```
 
 2. Start the program:
+
    ```bash
    ros2 service call /api_agent/robot/post/robot_control std_srvs/srv/SetBool "{data: true}"
    ```
 
 3. Set initialization pose:
    This service adjusts the Gazebo position based on the actual robot's pose values:
+
    ```bash
    ros2 service call /api_agent/inital_pose std_srvs/srv/Trigger
    ```
-   
+
    After executing this command, you should see the red robot model move to match the current position of the actual robot, as shown in the image below:
 
    ![init_pose](../_assets/init_pose.png)

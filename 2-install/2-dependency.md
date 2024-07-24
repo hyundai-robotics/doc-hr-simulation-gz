@@ -48,6 +48,7 @@ source ~/ros2_ws/install/setup.bash
 ```
 
 This process involves:
+
 1. Changing to the `hr_simulation_gz` directory.
 2. Copying the `install` directory to the root of `ros2_ws`.
 3. Sourcing the `setup.bash` file to make the newly installed packages available in the current shell session.
