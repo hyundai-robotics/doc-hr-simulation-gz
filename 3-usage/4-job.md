@@ -43,23 +43,26 @@ onl.interval=0.1 #Online.Traject Movement time from pose accumulated in buffer t
 onl.init # online trajectory operation init (buffer init)
 ```
 
+For detailed information, refer to the following documentation:
+[https://hrbook-hrc.web.app/#/view/doc-hrscript/english/5-moving-robot/14-online.Traject](https://hrbook-hrc.web.app/#/view/doc-hrscript/english/5-moving-robot/14-online.Traject)
+
+## Configuration Steps
+
 - Creates a global `online.Traject` object named `onl`
 - Configures the online trajectory parameters:
   - Disables `time_from_start`
   - Sets `look_ahead_time` to 0.1 seconds
-  - Sets `interval` to 0.1 seconds
+  - Sets `interval` to 0.1 seconds 
 - Initializes the online trajectory buffer
 
 ### Main Loop
 
 ```text
 var msg
-#var po
 10 enet0.recv
 msg=result()
 enet0.send msg
 print msg
-#po=Pose(msg)
 onl.buf_in msg #Put the pose in the 'po' variable into the online.Traject buffer.
 goto 10
 ```
