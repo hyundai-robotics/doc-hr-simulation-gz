@@ -8,7 +8,7 @@ Navigate to the `src` directory of your ROS2 workspace and clone the necessary p
 
 ```bash
 cd ~/ros2_ws/src
-git clone https://github.com/...
+git clone https://github.com/hyundai-robotics/hr_simulation_gz.git
 ```
 
 Replace the URL with the actual repository URL for your project.
