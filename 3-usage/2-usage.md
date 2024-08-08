@@ -36,6 +36,7 @@ You should see output similar to this:
 
 ![api_agent](../_assets/api_agent.png)
 
+
 ### Step 3: Prepare the Robot Controller
 
 After launching the HD Hyundai Robotics robot simulation, follow these steps to control the robot:
@@ -43,6 +44,24 @@ After launching the HD Hyundai Robotics robot simulation, follow these steps to 
 1. Switch the controller's TP to playback mode.
 2. Copy the `.job` code provided in the package to the appropriate location.
 3. Load the copied `.job` file on the TP.
+
+Additionally, here's how to insert the .job code into the TP using a Service:
+
+After connecting to the controller via network, execute the following bash command:
+
+```bash
+ros2 launch api_agent api_agent.launch.py
+```
+
+Then, check the location of the job code in the Package and run the following command:
+
+```bash
+ros2 service call /api_agent/file/post/files api_msgs/srv/FileSend "{target_file: '/project/jobs/7000_ethernet.job', source_file: '/home/hyojun/7000_ethernet.job'}"
+```
+
+The target_file is the location where the file will be copied on the TP, and source_file is the location of the file on your computer that you want to send.
+
+![file_send](../_assets/file_send.png)
 
 ### Step 4: Control the Robot
 
