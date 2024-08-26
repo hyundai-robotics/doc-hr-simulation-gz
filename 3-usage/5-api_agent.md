@@ -1,4 +1,218 @@
-# 1. Operation of `gz_trigger_callback`
+1. setup_tf_listener function
+```markdown
+## setup_tf_listener function
+
+### Purpose
+Performs the initial setup of the ROS2 node.
+
+### Main Operations
+- Sets up various subscribers, a service, a publisher, and a timer.
+
+### Configured Subscribers
+1. execute_feedback_sub_
+   - Topic: "/execute_trajectory/_action/feedback"
+   - Type: moveit_msgs::action::ExecuteTrajectory::Impl::FeedbackMessage
+   - Callback: feedback_callback
+
+2. action_feedback_sub_
+   - Topic: "/move_action/_action/feedback"
+   - Type: moveit_msgs::action::MoveGroup::Impl::FeedbackMessage
+   - Callback: action_feedback_callback
+
+3. action_status_sub_
+   - Topic: "/move_action/_action/status"
+   - Type: action_msgs::msg::GoalStatusArray
+   - Callback: action_status_callback
+
+4. joint_state_sub_
+   - Topic: "/joint_states"
+   - Type: sensor_msgs::msg::JointState
+   - Callback: jointStateCallback
+
+5. planning_data_sub_
+   - Topic: "/display_planned_path"
+   - Type: moveit_msgs::msg::DisplayTrajectory
+   - Callback: planningDataCallback
+
+6. execute_status_sub_
+   - Topic: "/execute_trajectory/_action/status"
+   - Type: action_msgs::msg::GoalStatusArray
+   - Callback: execute_status_callback
+
+### Configured Service
+- joint_service_
+  - Service Name: "/api_agent/inital_pose"
+  - Type: std_srvs::srv::Trigger
+  - Callback: gz_trigger_callback
+
+### Configured Publisher
+- joint_trajectory_publisher_
+  - Topic: "/joint_trajectory_controller/joint_trajectory"
+  - Type: trajectory_msgs::msg::JointTrajectory
+
+### Configured Timer
+- timer_
+  - Period: 10 milliseconds
+  - Callback: timer_callback
+```
+
+2. execute_status_callback function
+```markdown
+## execute_status_callback function
+
+### Purpose
+Handles execution status updates.
+
+### Subscribed Topic
+- Name: "/execute_trajectory/_action/status"
+- Type: action_msgs::msg::GoalStatusArray
+
+### Main Operations
+1. If the message's status_list is not empty:
+   - Sets execute_status_ to true
+   - Logs each status
+2. If the message's status_list is empty:
+   - Logs a warning message
+```
+
+3. planningDataCallback function
+```markdown
+## planningDataCallback function
+
+### Purpose
+Processes planned trajectory data.
+
+### Subscribed Topic
+- Name: "/display_planned_path"
+- Type: moveit_msgs::msg::DisplayTrajectory
+
+### Main Operations
+1. If the received trajectory is not empty:
+   - Converts position information for each point in the trajectory from radians to degrees
+   - Stores the converted position information in planned_positions_
+   - Initializes current_position_index to 0
+   - Sets trajectory_in_progress to true
+2. If the received trajectory is empty:
+   - Logs a warning message
+```
+
+4. gz_trigger_callback function
+```markdown
+## gz_trigger_callback function
+
+### Purpose
+Handles a trigger to set the robot's initial pose.
+
+### Service
+- Name: "/api_agent/inital_pose"
+- Type: std_srvs::srv::Trigger
+
+### Main Operations
+1. Retrieves current robot joint positions
+2. Logs joint positions
+3. Dynamically sets joint names based on the number of joints
+4. Creates and publishes a JointTrajectory message
+5. Sets service response (success status and message)
+```
+
+5. timer_callback function
+```markdown
+## timer_callback function
+
+### Purpose
+Runs periodically to check the robot's status and perform necessary tasks.
+
+### Main Operations
+1. Real hardware mode (fake_hardware_ = false):
+   - If current state is "START" and joint states are available:
+     - Sorts joint data in desired order
+     - Sends sorted data (calls send_data function)
+     - Logs joint information
+2. Virtual hardware mode (fake_hardware_ = true):
+   - If execute_status_ is true and trajectory_in_progress_ is true:
+     - Processes planned position data
+     - Reorders data (axes 1-6, then conveyor)
+     - Sends sorted data (calls send_data function)
+     - Logs joint information
+   - Logs when trajectory is completed
+```
+
+6. feedback_callback function
+```markdown
+## feedback_callback function
+
+### Purpose
+Handles feedback from trajectory execution.
+
+### Subscribed Topic
+- Name: "/execute_trajectory/_action/feedback"
+- Type: moveit_msgs::action::ExecuteTrajectory::Impl::FeedbackMessage
+
+### Main Operations
+- Updates current_state_ based on feedback state:
+  - Sets current_state_ to "START" when state is "MONITOR"
+  - Sets current_state_ to "STOP" when state is "IDLE"
+```
+
+7. action_feedback_callback function
+```markdown
+## action_feedback_callback function
+
+### Purpose
+Handles feedback from move group action.
+
+### Subscribed Topic
+- Name: "/move_action/_action/feedback"
+- Type: moveit_msgs::action::MoveGroup::Impl::FeedbackMessage
+
+### Main Operations
+- Updates current_state_ based on feedback state:
+  - Sets current_state_ to "START" when state is "PLANNING" and flag_state_ is true
+  - Sets current_state_ to "STOP" when state is "IDLE"
+```
+
+8. action_status_callback function
+```markdown
+## action_status_callback function
+
+### Purpose
+Handles action status updates.
+
+### Subscribed Topic
+- Name: "/move_action/_action/status"
+- Type: action_msgs::msg::GoalStatusArray
+
+### Main Operations
+- Updates flag_state_ by checking each status:
+  - Sets flag_state_ to true when status is "EXECUTING"
+```
+
+9. jointStateCallback function
+```markdown
+## jointStateCallback function
+
+### Purpose
+Updates the latest joint state.
+
+### Subscribed Topic
+- Name: "/joint_states"
+- Type: sensor_msgs::msg::JointState
+
+### Main Operations
+- Stores the received joint state message in latest_joint_state_
+```
+
+Overall flow:
+1. `setup_tf_listener` initializes all subscribers, services, publishers, and timers.
+2. `timer_callback` runs periodically, checking the robot's current state and performing necessary tasks.
+3. Various callback functions (`execute_status_callback`, `planningDataCallback`, `feedback_callback`, `action_feedback_callback`, `action_status_callback`, `jointStateCallback`) receive and process data from their respective topics.
+4. `gz_trigger_callback` handles service requests for setting the initial pose.
+5. The robot's state, planned trajectories, and execution status are continuously updated and monitored.
+6. Joint trajectories are published and data is sent as needed.
+
+This system appears to be part of a complex robot control system that monitors the robot's state in real-time, executes planned motions, and handles necessary feedback.
+
+# 2. Operation of `gz_trigger_callback`
 
 The `gz_trigger_callback` function is responsible for setting the robot's initial pose and publishing related information. When this function is called, it operates in the following sequence:
 
@@ -21,7 +235,7 @@ The `gz_trigger_callback` function is responsible for setting the robot's initia
    - Sets the execution time to 3 seconds.
 
 6. **Publish Joint Trajectory**
-   - Publishes the generated trajectory message via `joint_trajectory_publisher_`.
+   - Publishes the generated trajectory message via `joint_trajectory_publisher`, Topic: `/joint_trajectory_controller/joint_trajectory`.
 
 7. **Set Response**
    - Sets the `success` field of the service response to `true`.
@@ -34,7 +248,7 @@ This function is used to move the robot to its initial pose, generating and publ
 
 ---
 
-# 2. Timer Callback Data Transmission Criteria and State Management
+# 3. Timer Callback Data Transmission Criteria and State Management
 
 ## State and Status Triggers
 
@@ -145,7 +359,7 @@ This Timer Callback system monitors the robot's state through various ROS topics
 
 ---
 
-# 3. `ApiAgent::start_receive()` Function Data Flow
+# 4. `ApiAgent::start_receive()` Function Data Flow
 
 ## 1. Data Reception
 - **Input**: Raw data via UDP socket.
