@@ -47,6 +47,21 @@ cp install ~/ros2_ws/
 source ~/ros2_ws/install/setup.bash
 ```
 
+Additionally, to use the simulation, you need to build the workspace using the following command:
+
+```bash
+cd ~/ros2_ws
+colcon build --symlink-install
+```
+
+This `colcon build` command builds all packages in the workspace and installs them using symbolic links. This allows changes in source files to take effect immediately without requiring a rebuild.
+
+After the build is complete, open a new terminal or run the following command in your current terminal to apply the updated environment:
+
+```bash
+source ~/ros2_ws/install/setup.bash
+```
+
 This process involves:
 
 1. Changing to the `hr_simulation_gz` directory.

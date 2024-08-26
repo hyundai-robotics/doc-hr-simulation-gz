@@ -14,6 +14,10 @@ The following robots can be simulated using the `hr_sim_moveit.launch.py` file i
 
 ### Step 1: Launch Simulation and MoveIt
 
+실행하는 hr_simulation 
+
+hr_simulation/l
+
 To start the simulation and MoveIt, run the following command:
 
 ```bash
@@ -25,6 +29,10 @@ This will open a window similar to the image below:
 ![simulation](../_assets/simulation.png)
 
 ### Step 2: Launch API Agent
+
+ip주소 및 port 수정, fake_hardware 설정 하려면 해당 경로에서 수정
+
+install/api_agent/share/api_agent/launch/api_agent.launch.py
 
 To communicate with the Hi6 controller, run:
 
