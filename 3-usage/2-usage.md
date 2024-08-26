@@ -36,7 +36,6 @@ You should see output similar to this:
 
 ![api_agent](../_assets/api_agent.png)
 
-
 ### Step 3: Prepare the Robot Controller
 
 After launching the HD Hyundai Robotics robot simulation, follow these steps to control the robot:

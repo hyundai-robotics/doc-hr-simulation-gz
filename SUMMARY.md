@@ -19,3 +19,4 @@
   * [Basic Usage](3-usage/2-usage.md)
   * [Services](3-usage/3-service.md)
   * [Job Setup](3-usage/4-job.md)
+  * [Job Setup](3-usage/5-api_agent.md)

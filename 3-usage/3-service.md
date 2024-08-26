@@ -13,6 +13,7 @@ This document provides a comprehensive list of ROS2 services available in the HD
 - [File Manager Services](#file-manager-services)
 - [Task Services](#task-services)
 - [Clock Services](#clock-services)
+- [Console Services](#console-services)
 
 For examples and detailed information on how to use these services, please refer to the [HI6 Open API documentation](https://hrbook-hrc.web.app/#/view/doc-hi6-open-api/english/README).
 

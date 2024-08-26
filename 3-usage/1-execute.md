@@ -28,6 +28,12 @@ To use MoveIt with the simulated robot:
 ros2 launch hr_simulation hr_sim_moveit.launch.py
 ```
 
+## MoveIt with Simulated Carriage and Robot
+
+```bash
+ ros2 launch hr_simulation hr_sim_moveit_conveyor.launch.py 
+```
+
 ## Connecting to Robot Controller
 
 To connect to the actual robot controller:
