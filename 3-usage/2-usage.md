@@ -14,9 +14,7 @@ The following robots can be simulated using the `hr_sim_moveit.launch.py` file i
 
 ### Step 1: Launch Simulation and MoveIt
 
-실행하는 hr_simulation 
-
-hr_simulation/l
+hr_simulation/
 
 To start the simulation and MoveIt, run the following command:
 
