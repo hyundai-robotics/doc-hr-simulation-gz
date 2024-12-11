@@ -1,31 +1,31 @@
-# 1. Setup ROS2 Install
+# 1. ROS2 설치 설정
 
-This guide provides instructions for downloading and executing the `ros2-humble-desktop-main.sh` script to install ROS2 Humble Desktop.
+이 가이드에서는 ROS2 Humble Desktop을 설치하기 위해 `ros2-humble-desktop-main.sh` 스크립트를 다운로드하고 실행하는 방법에 대한 지침을 제공합니다.
 
-## Installation Steps
+## 설치 단계
 
-1. Download the `ros2-humble-desktop-main.sh` script from the package repository.
+1. 패키지 저장소에서 `ros2-humble-desktop-main.sh` 스크립트를 다운로드합니다.
 
-2. Open a terminal and navigate to the directory where you downloaded the script.
+2. 터미널을 열고 스크립트를 다운로드한 디렉토리로 이동합니다.
 
-3. Make the script executable and run it by executing the following command:
+3. 다음 명령을 실행하여 스크립트를 실행 가능하게 만들고 실행합니다.:
 
    ```bash
    bash ros2-humble-desktop-main.sh
    ```
 
-   > **NOTE:** A `~/ros2_ws/src` folder will be created. If desired, users can create and use a different folder without any issues.
+   > **NOTE:** `~/ros2_ws/src` 폴더가 생성됩니다. 원하는 경우 사용자는 문제 없이 다른 폴더를 생성하여 사용할 수 있습니다.
 
-4. Follow any on-screen prompts during the installation process.
+4. 설치 과정에서 화면에 표시되는 지시를 따르세요.
 
-5. Once the installation is complete, restart your system or source the ROS2 setup file:
+5. 설치 완료 후 시스템을 재시작하거나 ROS2 설정 파일을 source 하세요:
 
     ```bash
     source /opt/ros/humble/setup.bash
     ```
 
-## Next Steps
+## 다음 단계
 
-After successful installation, you can proceed with configuring your ROS2 workspace and installing any project-specific dependencies.
+설치가 성공적으로 완료되었다면, ROS@2 워크스페이스를 구성하고 프로젝트별 의존성을 설치하는 작업을 진행할 수 있습니다.
 
-Remember to source the ROS2 setup file in each new terminal session where you want to use ROS2, or add it to your `.bashrc` file for automatic sourcing.
+ROS2를 사용하려는 새 터미널 세션마다 설정 파일을 `source` 하는 것을 잊지 마세요. 또는 자동 소싱을 위해 `.bashrc` 파일에 추가할 수 도 있습니다.
