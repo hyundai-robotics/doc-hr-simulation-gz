@@ -1,119 +1,100 @@
-# 2. Packages
+# 2. 패키지
 
-| Package Name     | Description |
-|------------------|-------------|
-| hr_description   | Package containing description files for HR robots, including various configuration files and visual/physical parameter files for the models. |
-| hr_moveit_config | Folder containing HR MoveIt configuration files, including setup files for integration with MoveIt. |
-| hr_simulation    | Main folder of the HR Simulation package, containing simulation control and related configuration files. |
-| api_agent        | Package for communication with the HR Hi6 controller and usage of ROS2 Services. |
-| api_msgs         | Service Message Package for api_agent. |
+| 패키지 이름     | 설명 |
+|-------------------|--------------------------------------------------------------------------------------------------|
+| hdr_description   | 로봇 모델에 대한 다양한 구성 파일과 시각적/물리적 매개변수 파일을 퐇마하여 HR로봇에 대한 파일이 들어 있는 패키지 입니다. |
+| hdr_moveit_config | HDR Moveit 구성 파일이 들어 있는 패키지 입니다.                                                         |
+| hdr_simulation    | HDR 시뮬레이션 패키지의 주요 폴더로, 시뮬레이션 제어 및 관련 구성 패키지 입니다.                                |
 
 
-# ROS2 Package Structure, Launch Files, and Parameters
+# ROS2 패키지 구조, Launch 파일 및 Parameters
 
-## api_agent
+## hdr_description
 
-### Launch Files
+### 폴더
 
-- **api_agent.launch.py**: Launches the API agent for communication with the robot controller.
-
-| Parameter | Description |
-|-----------|-------------|
-| openapi_ip | Remote host for OPENAPI communication |
-| openapi_port | Remote port for OPENAPI communication |
-| udp_remote_host | Remote host for UDP communication |
-| udp_remote_port | Remote port for UDP communication |
-| udp_local_port | Local port for UDP communication |
-| motor_pos_on_off | Enable/disable motor position updates |
-| motor_pos_interval_ms | Minimum allowed interval for motor position updates |
-| fake_hardware | Indicate whether robot is running with fake hardware mirroring command to its states |
-
-## hr_description
-
-### Folders
-
-- **config**: Contains physical parameter information for each robot model
-- **meshes**: Contains STL files representing the external appearance of each robot model
-- **rviz**: Contains RViz configuration files
-- **urdf**: Contains URDF files for robot descriptions
+- **config**: 각 로봇 모델에 대한 물리적 매개변수 정보를 포함합니다.
+- **meshes**: 각 로봇 모델의 외부 모양을 나타내는 STL 파일이 포함되어 있습니다.
+- **rviz**: Rviz 구성 파일이 포함되어 있습니다.
+- **urdf**: 로봇 설명을 위한 URDF 파일이 포함되어 있습니다.
 
 ### Launch Files
 
-- **view_hr.launch.py**: Launches the HR robot model visualization in RViz.
+- **view_hdr.launch.py**: Rviz 에서 HR 로봇 모델 시각화를 실행합니다.
 
-| Parameter | Description |
+| 매개변수 | 설명 |
 |-----------|-------------|
-| hr_type | Type/series of used HR robot |
-| safety_limits | Enables the safety limits controller if true |
-| safety_pos_margin | The margin to lower and upper limits in the safety controller |
-| safety_k_position | k-position factor in the safety controller |
-| description_package | Description package with robot URDF/XACRO files. Usually the argument is not set, it enables use of a custom description |
-| description_file | URDF/XACRO description file with the robot |
-| tf_prefix | Multi-robot setup. If changed, joint names in the controllers' configuration have to be updated |
+| hdr_type  | HDR 로봇의 종류/시리즈 |
+| safety_limits | true로 설정 할 경우 safety limits 컨트롤러를 활성화합니다. |
+| safety_pos_margin | 안전 컨트롤러에서 상한선과 하한선까지의 여유 범위|
+| safety_k_position | 안전 컨트롤러의 k-position 계수|
+| description_package | 로봇 URDF/XACRO 파일이 포함된 설명 패키지. 일반적으로 이 인수는 설정하지 않으며, 사용자 지정 설명을 사용할 수 있도록 합니다. |
+| description_file | 로봇이 포함된 URDF/XACRO 설명 파일 |
+| tf_prefix | 다중 로봇 설정. 변경된 경우 컨트롤러 구성의 조인트 이름을 업데이트해야 합니다. |
 
-## hr_moveit_config
+## hdr_moveit_config
 
-### Folders
+### 폴더
 
-- **config**: Contains MoveIt configuration files
-- **rviz**: Contains RViz configuration files
-- **srdf**: Contains Semantic Robot Description Format files
+- **config**: Moveit 구성 파일이 포함되어 있습니다.
+- **rviz**: Rviz 구성 파일이 포함되어 있습니다.
+- **srdf**: Semantic Robot Description Format(SRDF) 파일을 포함합니다.
 
 ### Launch Files
 
-- **hr_moveit.launch.py**: Launches the MoveIt configuration for the HR robot.
+- **hdr_moveit.launch.py**: HDR 로봇에 대한 Moveit 구성을 실행합니다.
 
-| Parameter | Description |
+| 매개변수 | 설명 |
 |-----------|-------------|
-| hr_type | Type/series of used HR robot |
-| use_fake_hardware | Indicate whether robot is running with fake hardware mirroring command to its states |
-| safety_limits | Enables the safety limits controller if true |
-| safety_pos_margin | The margin to lower and upper limits in the safety controller |
-| safety_k_position | k-position factor in the safety controller |
-| description_package | Description package with robot URDF/XACRO files. Usually the argument is not set, it enables use of a custom description |
-| description_file | URDF/XACRO description file with the robot |
-| moveit_config_package | MoveIt config package with robot SRDF/XACRO files. Usually the argument is not set, it enables use of a custom moveit config |
-| moveit_config_file | MoveIt SRDF/XACRO description file with the robot |
-| moveit_joint_limits_file | MoveIt joint limits that augment or override the values from the URDF robot_description |
-| warehouse_sqlite_path | Path where the warehouse database should be stored |
-| use_sim_time | Make MoveIt use simulation time. This is needed for trajectory planning in simulation |
-| prefix | Multi-robot setup. If changed, joint names in the controllers' configuration have to be updated |
+| hdr_type  | HDR 로봇의 종류/시리즈 |
+| use_fake_hardware | 로봇이 명령을 상태로 반영하는 가상 하드웨어로 실행 중인 여부를 나타냅니다. |
+| safety_limits | true로 설정 할 경우 safety limits 컨트롤러를 활성화합니다. |
+| safety_pos_margin | 전 컨트롤러에서 상한선과 하한선까지의 여유 범위 |
+| safety_k_position | 안전 컨트롤러의 k-position 계수 |
+| description_package | 로봇 URDF/XACRO 파일이 포함된 설명 패키지. 일반적으로 이 인수는 설정하지 않으며, 사용자 지정 설명을 사용할 수 있도록 합니다. |
+| description_file | 로봇이 포함된 URDF/XACRO 설명 파일 |
+| moveit_config_package | 로봇 SRDF/XACRO 파일이 포함된 Moveit 설정 패키지. 일반적으로 이 인수는 설정하지 않으며, 사용자 지정 Moveit 설정을 사용할 수 있도록 합니다. |
+| moveit_config_file | 로봇의 Moveit SRDF/XACRO 설명 파일 |
+| moveit_joint_limits_file | URDF의 robot_description에서 제공된 값을 보완하거나 재정의하는 Moveit 관절 제한 |
+| warehouse_sqlite_path | warehouse 데이터베이스가 저장될 경로 |
+| use_sim_time | Moveit에서 시뮬레이션 시간을 사용하도록 설정합니다. 이는 시뮬레이션에서 경로 계획에 필요합니다. |
+| prefix | 다중로봇 설정 변경시 컨트롤러 구성의 관절 이름을 업데이트해야 합니다. |
 
-## hr_simulation
+## hdr_simulation
 
-### Folders
+### 폴더
 
-- **config**: Contains HR controller-related configuration files
+- **config**: HR 컨트롤러와 관련된 구성 파일을 포함합니다.
 
 ### Launch Files
 
-- **hr_sim_control.launch.py**: Launches the HR robot simulation with basic control.
+- **hdr_sim_control.launch.py**: HR 로봇 시뮬레이션을 기본 제어와 함께 실행합니다.
 
-| Parameter | Description |
+| 매개변수 | 설명 |
 |-----------|-------------|
-| hr_type | Type/series of used HR robot |
-| safety_limits | Enables the safety limits controller if true |
-| safety_pos_margin | The margin to lower and upper limits in the safety controller |
-| safety_k_position | k-position factor in the safety controller |
-| runtime_config_package | Package with the controller's configuration in "config" folder. Usually the argument is not set, it enables use of a custom setup |
-| controllers_file | YAML file with the controllers configuration |
-| description_package | Description package with robot URDF/XACRO files. Usually the argument is not set, it enables use of a custom description |
-| description_file | URDF/XACRO description file with the robot |
-| prefix | Multi-robot setup. If changed, joint names in the controllers' configuration have to be updated |
-| start_joint_controller | Enable headless mode for robot control |
-| initial_joint_controller | Robot controller to start |
+| hdr_type  | HDR 로봇의 종류/시리즈 |
+| safety_limits | true로 설정 할 경우 safety limits 컨트롤러를 활성화합니다. |
+| safety_pos_margin | 전 컨트롤러에서 상한선과 하한선까지의 여유 범위 |
+| safety_k_position | 안전 컨트롤러의 k-position 계수 |
+| runtime_config_package | "config" 폴더에 컨트롤러 구성이 있는 패키지. 일반적으로 인수로 설정되지 않으며 사용자 지정 설정을 사용할 수 있습니다. |
+| controllers_file | 컨트롤러 구성이 포함된 YAML 파일. |
+| description_package | 로봇 URDF/XACRO 파일이 포함된 설명 패키지. 일반적으로 이 인수는 설정하지 않으며, 사용자 지정 설명을 사용할 수 있도록 합니다. |
+| description_file | 로봇이 포함된 URDF/XACRO 설명 파일 |
+| prefix |다중로봇 설정 변경시 컨트롤러 구성의 관절 이름을 업데이트해야 합니다. |
+| start_joint_controller | 로봇 제어를 위한 headless 모드를 활성화합니다. |
+| initial_joint_controller | 시작할 로봇 컨트롤러를 설정합니다. |
 
-- **hr_sim_moveit.launch.py**: Launches the HR robot simulation with MoveIt integration.
+- **hdr_sim_moveit.launch.py**: HR로봇 시뮬레이션을 Moveit통합과 함께 실행합니다.
 
-| Parameter | Description |
+| 매개변수 | 설명 |
 |-----------|-------------|
-| hr_type | Type/series of used HR robot |
-| use_fake_hardware | Indicate whether robot is running with fake hardware mirroring command to its states |
-| safety_limits | Enables the safety limits controller if true |
-| runtime_config_package | Package with the controller's configuration in "config" folder. Usually the argument is not set, it enables use of a custom setup |
-| controllers_file | YAML file with the controllers configuration |
-| description_package | Description package with robot URDF/XACRO files. Usually the argument is not set, it enables use of a custom description |
-| description_file | URDF/XACRO description file with the robot |
-| moveit_config_package | MoveIt config package with robot SRDF/XACRO files. Usually the argument is not set, it enables use of a custom moveit config |
-| moveit_config_file | MoveIt SRDF/XACRO description file with the robot |
-| prefix | Multi-robot setup. If changed, joint names in the controllers' configuration have to be updated |
+| hdr_type  | HDR 로봇의 종류/시리즈 |
+| use_fake_hardware | 로봇이 명령을 상태로 반영하는 가상 하드웨어로 실행 중인 여부를 나타냅니다. |
+| safety_limits | true로 설정 할 경우 safety limits 컨트롤러를 활성화합니다. |
+| runtime_config_package | "config" 폴더에 컨트롤러 구성이 있는 패키지. 일반적으로 인수로 설정되지 않으며 사용자 지정 설정을 사용할 수 있습니다. |
+| controllers_file | 컨트롤러 구성이 포함된 YAML 파일. |
+| description_package | 로봇 URDF/XACRO 파일이 포함된 설명 패키지. 일반적으로 이 인수는 설정하지 않으며, 사용자 지정 설명을 사용할 수 있도록 합니다. |
+| description_file | 로봇이 포함된 URDF/XACRO 설명 파일 |
+| moveit_config_package | 로봇 SRDF/XACRO 파일이 포함된 Moveit 설정 패키지. 일반적으로 이 인수는 설정하지 않으며, 사용자 지정 Moveit 설정을 사용할 수 있도록 합니다. |
+| moveit_config_file | 로봇의 Moveit SRDF/XACRO 설명 파일 |
+| prefix | 다중로봇 설정 변경시 컨트롤러 구성의 관절 이름을 업데이트해야 합니다. |
