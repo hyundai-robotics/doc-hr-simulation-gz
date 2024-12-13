@@ -1,10 +1,10 @@
-# Ethernet Communication Manual
+# 이더넷 통신 매뉴얼
 
-This manual explains how to interface with external equipment using Ethernet UDP/IP and TCP/IP communication, utilizing the enet module provided as a standard feature on the Hi6 controller.
+이 매뉴얼은 Hi6 컨트롤러에 기본 기능으로 제공되는 enet 모듈 및 Open API을 활용하여, Ethernet UDP/IP 및 TCP/IP 통신을 통해 외부 장비와 인터페이스하는 방법을 설명합니다.
 
-Please refer to the diagram below for the basic connection structure of Ethernet communication.
+아래 다이어그램을 참조하여 이더넷 통신의 기본 연결 구조를 확인하세요.
 
-LAN communication: Communication is possible within the same network or with a different host/PC.
+LAN 통신 : 동일 네트워크 내 또는 다른 호스트/PC와의 통신이 가능합니다.
 
 <div align="center" style="background-color: white; display: inline-block; padding: 10px;">
   <img src="../_assets/hub.png" alt="hub" width="500"/>
@@ -14,13 +14,13 @@ LAN communication: Communication is possible within the same network or with a d
   <img src="../_assets/ip_adress.png" alt="ip address" width="500"/>
 </div>
 
-## 2-1 Cable Connection
+## 2-1 케이블 연결
 
-Connect the Ethernet cable for communication with other equipment to the user Ethernet port.
+다른 장비와 통신하기 위해 사용자 이더넷 포트에 이더넷 케이블을 연결합니다.
 
-- Choose one from LAN1, LAN2, or LAN3
-- Hi6-N controller: Top of the main module on the door middle panel
-- Hi6-T controller: Front Ethernet port of the controller
+- LAN1, LAN2, LAN3 중 하나를 선택
+- Hi6-N 컨트롤러 : 도어 중간 패널의 메인 모듈 상단
+- Hi6-T 컨트롤러 : 컨트롤러의 전면의 이더넷 포트
 
 <div style="display: flex; justify-content: space-around; align-items: center; background-color: white; padding: 10px;">
   <div style="margin-right: 20px;">
@@ -31,24 +31,23 @@ Connect the Ethernet cable for communication with other equipment to the user Et
   </div>
 </div>
 
-## 2-2 Controller Network Settings
+## 2-2 컨트롤러 네트워크 설정
 
-Set the IP address of the Hi6 controller using the teaching pendant.
+티칭 팬던트를 사용하여 Hi6 컨트롤러의 IP주소를 설정합니다.
 
-1. [F2:System] → [2:Control Parameters] → [9:Network] → 
-2. [1:Environment Settings] → Click [LAN# (General)] where the cable is connected
-3. Enter IP address and subnet mask
-   * Note: Assign values and select gateway and port forwarding if necessary
-4. After setting, press [F7:Confirm] → Reboot the controller
+1. **[F2:시스템] → [2:제어 파라미터] → [9:네트워크]** 로 이동합니다.
+2. [1:환경 설정] → 케이블이 연결된 **[LAN# (일반)]** 을 선택합니다. 
+3. IP주소와 서브넷 마스크를 입력합니다.
+  * 참고 : 필요한 경우 게이트웨이와 포트 포워딩을 설정합니다.
+4. 설정 완료후 **[F7:확인]** 을 누르고 컨트롤러를 재부팅합니다.
 
 <div align="center" style="background-color: white; display: inline-block; padding: 10px;">
   <img src="../_assets/ip_setting.png" alt="ip setting" width="500"/>
 </div>
 
-Verify if Ethernet communication is possible with the other device.
-
-If the other device is a PC, check the network connection status between the two devices through a Ping test in the [Command Prompt].
+다른 장치외의 이더넷 통신이 가능한지 확인합니다.
+ * 다른 장치가 PC인 경우, **[명령 프롬프트]** 에서 Ping 테스트를 통해 두 장치 간의 네트워크 연결 상태를 확인하세요.
 
 <div align="center" style="background-color: white; display: inline-block; padding: 10px;">
   <img src="../_assets/ping_check.png" alt="ping check" width="500"/>
-</div>
+</div>→

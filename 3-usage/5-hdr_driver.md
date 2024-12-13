@@ -235,7 +235,7 @@ The `gz_trigger_callback` function is responsible for setting the robot's initia
    - Sets the execution time to 3 seconds.
 
 6. **Publish Joint Trajectory**
-   - Publishes the generated trajectory message via `joint_trajectory_publisher`, Topic: `/joint_trajectory_controller/joint_trajectory`.
+   - Publishes the generated trajectory message via `joConsole Servicesint_trajectory_publisher`, Topic: `/joint_trajectory_controller/joint_trajectory`.
 
 7. **Set Response**
    - Sets the `success` field of the service response to `true`.

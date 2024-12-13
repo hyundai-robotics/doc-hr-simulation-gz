@@ -1,10 +1,10 @@
 ﻿# Summary
 
-* [HR Simulation GZ](README.md)
+* [HDR Simulation GZ](README.md)
 
 ## 1. Introduction
 * [Introduction](1-intro/README.md)
-  * [About HR Simulation GZ](1-intro/1-intro.md)
+  * [About HDR Simulation GZ](1-intro/1-intro.md)
   * [Package Information](1-intro/2-package.md)
 
 ## 2. Installation
@@ -19,4 +19,4 @@
   * [Basic Usage](3-usage/2-usage.md)
   * [Services](3-usage/3-service.md)
   * [Job Setup](3-usage/4-job.md)
-  * [API Agent](3-usage/5-api_agent.md)
+  * [HDR Driver](3-usage/5-hdr_driver.md)
